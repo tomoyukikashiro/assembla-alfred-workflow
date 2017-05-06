@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.github.tomoyukikashiro.alfread-asembla</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>E9B30E58-0091-40C1-BE58-B91188B7295B</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7686E837-C418-4BE6-8530-80E24B1B2EBA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Tomoyuki Kashiro</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Assembla</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>7686E837-C418-4BE6-8530-80E24B1B2EBA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>asm</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>
+import sys
+import os
+import json
+import datetime
+
+team = os.environ['team']
+space = os.environ['space']
+
+today = datetime.date.today()
+next_day = today + datetime.timedelta(days=7 - today.weekday() if today.weekday()&gt;3 else 1)
+next_day = next_day.isoformat()
+
+
+options = [
+    {
+        'title': 'today\'s standup',
+        'subtitle': '',
+        'arg': 'https://{}.assembla.com/spaces/{}/scrum'.format(team, space),
+        'icon': {}, 
+        'autocomplete': 'today\'s standup',
+        'text': ''
+    },
+    {
+        'title': 'next standup',
+        'subtitle': '',
+        'arg': 'https://{}.assembla.com/spaces/{}/scrum?current_date={}'.format(team, space, next_day),
+        'icon': {}, 
+        'autocomplete': 'next standup',
+        'text': ''
+    },
+    {
+        'title': 'ticket list view',
+        'subtitle': '',
+        'arg': 'https://materialworld.assembla.com/spaces/{}/tickets/realtime_list'.format(space),
+        'icon': {}, 
+        'autocomplete': 'ticket list view',
+        'text': ''
+    },
+    {
+        'title': 'ticket card view',
+        'subtitle': '',
+        'arg': 'https://materialworld.assembla.com/spaces/{}/tickets/realtime_cardwall'.format(space),
+        'icon': {}, 
+        'autocomplete': 'ticket card view',
+        'text': ''
+    }
+]
+
+sys.stdout.write(json.dumps({'items': options}))</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string></string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>E9B30E58-0091-40C1-BE58-B91188B7295B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>7686E837-C418-4BE6-8530-80E24B1B2EBA</key>
+		<dict>
+			<key>xpos</key>
+			<integer>300</integer>
+			<key>ypos</key>
+			<integer>90</integer>
+		</dict>
+		<key>E9B30E58-0091-40C1-BE58-B91188B7295B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>90</integer>
+			<key>ypos</key>
+			<integer>90</integer>
+		</dict>
+	</dict>
+	<key>variables</key>
+	<dict>
+		<key>space</key>
+		<string>materialworld</string>
+		<key>team</key>
+		<string>materialworld</string>
+	</dict>
+	<key>version</key>
+	<string></string>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
