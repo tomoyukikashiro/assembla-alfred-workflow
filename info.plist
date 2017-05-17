@@ -8,11 +8,70 @@
 	<string>Tools</string>
 	<key>connections</key>
 	<dict>
+		<key>7E8CFA8A-0EC1-41E4-81AA-DA88BE54C8FE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D9CC2E6C-1FF5-4DD4-9D79-AF2D57CF0655</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>DCC7DB13-A555-4083-BD61-282B26C2C738</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DA929AF6-EB4E-44B4-BA0E-CDB10A819B43</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>E9B30E58-0091-40C1-BE58-B91188B7295B</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>7686E837-C418-4BE6-8530-80E24B1B2EBA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>EC7B5C9D-A57B-497C-803C-8169A2C4CFA7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7E8CFA8A-0EC1-41E4-81AA-DA88BE54C8FE</string>
+				<key>modifiers</key>
+				<integer>524288</integer>
+				<key>modifiersubtext</key>
+				<string>Copy ticket number</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>DCC7DB13-A555-4083-BD61-282B26C2C738</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Copy ticket url</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>12691CE2-F47E-4635-BB4C-E2136CB00659</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -143,17 +202,246 @@ sys.stdout.write(json.dumps({'items': options}))</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Copied ticket number</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D9CC2E6C-1FF5-4DD4-9D79-AF2D57CF0655</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>7E8CFA8A-0EC1-41E4-81AA-DA88BE54C8FE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Copied ticket url</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>DA929AF6-EB4E-44B4-BA0E-CDB10A819B43</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>DCC7DB13-A555-4083-BD61-282B26C2C738</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>ast</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>LOADING...</string>
+				<key>script</key>
+				<string># encoding: utf-8
+
+import urllib2, base64, os, sys, json
+import xml.etree.ElementTree as ET
+
+API_URL = 'https://app.assembla.com/tickets.xml'
+TICKET_BASE_URL = 'https://app.assembla.com/spaces/{}/tickets/{}/details'
+
+username = os.environ['username']
+password = os.environ['password']
+space = os.environ['space']
+
+
+def make_ticket_obj(ticket_xml):
+    number = ticket_xml.find('number').text
+    status = ticket_xml.find('status-name').text
+    title = ticket_xml.find('summary').text
+    url = TICKET_BASE_URL.format(space, number)
+    return {
+        'title': title, 
+        'subtitle': '#{} / {}'.format(number, status),
+        'arg': url,
+        'icon': {}, 
+        'autocomplete': '{}, {}, {}'.format(number, title, status),
+        'mods': {
+            'alt': {
+                'valid': True,
+                'arg': '#{}'.format(number),
+                'subtitle': 'Copy ticket number'
+            },
+            'cmd': {
+                'valid': True,
+                'arg': url,
+                'subtitle': 'Copy ticket url'
+            }
+        },
+        'quicklookurl': url
+    }
+
+
+request = urllib2.Request(API_URL)
+base64string = base64.encodestring('%s:%s' % (username, password)).replace('\n', '')
+request.add_header('Authorization', 'Basic %s' % base64string)
+request.add_header('Accept', 'application/xml')
+response = urllib2.urlopen(request)
+root = ET.parse(response).getroot()
+
+tickets = root.findall('ticket')
+data = []
+for ticket in tickets:
+    data.append(make_ticket_obj(ticket))
+
+sys.stdout.write(json.dumps({'items': data}))
+
+
+
+</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Search Your Tickets</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>EC7B5C9D-A57B-497C-803C-8169A2C4CFA7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>12691CE2-F47E-4635-BB4C-E2136CB00659</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>12691CE2-F47E-4635-BB4C-E2136CB00659</key>
+		<dict>
+			<key>xpos</key>
+			<integer>360</integer>
+			<key>ypos</key>
+			<integer>550</integer>
+		</dict>
 		<key>7686E837-C418-4BE6-8530-80E24B1B2EBA</key>
 		<dict>
 			<key>xpos</key>
 			<integer>300</integer>
 			<key>ypos</key>
 			<integer>90</integer>
+		</dict>
+		<key>7E8CFA8A-0EC1-41E4-81AA-DA88BE54C8FE</key>
+		<dict>
+			<key>xpos</key>
+			<integer>360</integer>
+			<key>ypos</key>
+			<integer>230</integer>
+		</dict>
+		<key>D9CC2E6C-1FF5-4DD4-9D79-AF2D57CF0655</key>
+		<dict>
+			<key>xpos</key>
+			<integer>540</integer>
+			<key>ypos</key>
+			<integer>230</integer>
+		</dict>
+		<key>DA929AF6-EB4E-44B4-BA0E-CDB10A819B43</key>
+		<dict>
+			<key>xpos</key>
+			<integer>550</integer>
+			<key>ypos</key>
+			<integer>390</integer>
+		</dict>
+		<key>DCC7DB13-A555-4083-BD61-282B26C2C738</key>
+		<dict>
+			<key>xpos</key>
+			<integer>360</integer>
+			<key>ypos</key>
+			<integer>390</integer>
 		</dict>
 		<key>E9B30E58-0091-40C1-BE58-B91188B7295B</key>
 		<dict>
@@ -162,14 +450,32 @@ sys.stdout.write(json.dumps({'items': options}))</string>
 			<key>ypos</key>
 			<integer>90</integer>
 		</dict>
+		<key>EC7B5C9D-A57B-497C-803C-8169A2C4CFA7</key>
+		<dict>
+			<key>xpos</key>
+			<integer>90</integer>
+			<key>ypos</key>
+			<integer>400</integer>
+		</dict>
 	</dict>
 	<key>variables</key>
 	<dict>
+		<key>password</key>
+		<string>prJEVkkpmmocoqMkfs7CBDZa</string>
 		<key>space</key>
 		<string>materialworld</string>
 		<key>team</key>
 		<string>materialworld</string>
+		<key>username</key>
+		<string>tomoyuki</string>
 	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>password</string>
+		<string>username</string>
+		<string>space</string>
+		<string>team</string>
+	</array>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
